@@ -218,3 +218,10 @@ __marimo__/
 .streamlit/secrets.toml
 
 .idea/
+.data/
+
+# SQLite database files
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

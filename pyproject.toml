@@ -8,7 +8,13 @@ version = "0.1.0"
 description = "A research paper discovery and retrieval system."
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [ "requests>=2.31", "feedparser>=6.0", "pydantic>=2.0",]
+dependencies = ["requests>=2.31",
+    "feedparser>=6.0",
+    "pydantic>=2.0",
+    "numpy>=1.24",
+    "torch>=2.0",
+    "transformers>=4.30",
+    "adapters>=0.2.0",]
 
 [tool.setuptools.packages.find]
 where = ["src"]
