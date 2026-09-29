@@ -7,7 +7,7 @@ storage, embedding) was building the data this depends on.
 from __future__ import annotations
 
 from calli.embeddings.specter2 import MODEL_NAME, Specter2Embedder
-from calli.storage.db import get_papers_by_ids, search_similar
+from calli.storage.db import get_papers_by_ids, search_hybrid
 import sqlite3
 
 
@@ -20,11 +20,15 @@ def ask(
 ) -> list[dict]:
     """Given a natural-language question, return the top_k most relevant papers.
 
-    Each result is a dict with the paper's metadata plus a "score" field
-    (cosine similarity, roughly 0-1, higher is more relevant).
+    Uses hybrid retrieval (embedding similarity + literal keyword overlap,
+    combined via Reciprocal Rank Fusion) rather than pure embedding search,
+    since dense embeddings alone can be fooled by papers that are
+    structurally similar but topically unrelated. Each result is a dict
+    with the paper's metadata plus a "score" field (an RRF score - useful
+    for ranking, not meaningful as an absolute number).
     """
     query_vector = embedder.embed_query(question)
-    ranked = search_similar(conn, model, query_vector, top_k=top_k)
+    ranked = search_hybrid(conn, model, query_vector, question, top_k=top_k)
 
     metadata_by_id = get_papers_by_ids(conn, [paper_id for paper_id, _ in ranked])
 

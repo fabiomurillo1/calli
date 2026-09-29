@@ -21,7 +21,7 @@ def main() -> None:
         "query",
         help="arXiv search query, e.g. 'cat:cs.CL AND abs:\"retrieval augmented generation\"'",
     )
-    parser.add_argument("--max-results", type=int, default=20)
+    parser.add_argument("--max-results", type=int, default=50)
     parser.add_argument(
         "--db-path",
         default=None,
