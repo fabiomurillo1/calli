@@ -6,12 +6,9 @@ grounded in what those papers say, rather than just a ranked list.
 """
 from __future__ import annotations
 
-import os
-from dotenv import load_dotenv
 import anthropic
 
-load_dotenv()
-anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+
 
 # Cheap and fast - good for iterating on the prompt/pipeline without worrying
 # about cost. Swap to "claude-sonnet-5" once you're tuning answer quality
